@@ -4,3 +4,4 @@ demoji
 pythainlp
 scikit-learn
 pandas
+gunicorn

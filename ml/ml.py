@@ -108,7 +108,7 @@ def classifing(text):
     df1 = df[list(table_all['Word'])]
     df1 = df1.fillna(0)
 
-    loaded_model = pickle.load(open('.\ml\clf_xgb_model.sav', 'rb'))
+    loaded_model = pickle.load(open('./ml/clf_xgb_model.sav', 'rb'))
     result = loaded_model.predict(df1)[0]
     prob = loaded_model.predict_proba(df1)[0][result] * 100
     return result, prob

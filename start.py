@@ -27,7 +27,7 @@ def submit():
 
         cursor.close()
         cnx.close()
-    except:
-        result = 'error'
+    # except:
+    #    result = 'error'
     finally:
         return {'data': result}

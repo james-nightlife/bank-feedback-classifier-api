@@ -28,6 +28,6 @@ def submit():
         cursor.close()
         cnx.close()
     except Exception as e:
-        result = e
+        result = str(e)
     finally:
         return {'data': result}

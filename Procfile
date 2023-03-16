@@ -1,1 +1,1 @@
-web: python start.py
+web: flask --app start.py --debug run

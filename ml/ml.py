@@ -117,7 +117,7 @@ def main(text):
     classlist = ['MyMo', 'บัตรและสลากออมสิน', 'สินเชื่อ', 'อื่น ๆ', 'เงินฝาก']
     text_token = tokenizing(text)
     text_class, prob = classifing(text_token)
-    data = [text, int(text_class+1), classlist[text_class], prob]
+    data = {"INPUT": text, "CLASS_NO": int(text_class+1), "CLASS_NAME": classlist[text_class], "PROBABILITY": prob}
     return data
 
 

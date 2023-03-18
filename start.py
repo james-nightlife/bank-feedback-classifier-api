@@ -1,10 +1,14 @@
 from flask import Flask, request
 from ml import ml
 import mysql.connector
+from flask_cors import CORS, cross_origin
+
 
 app = Flask(__name__)
+cors = CORS(app)
 
 @app.route('/submit', methods=['POST'])
+@cross_origin()
 def submit():
     result = []
     body = request.get_json()

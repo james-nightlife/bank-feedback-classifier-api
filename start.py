@@ -26,7 +26,7 @@ def submit():
         for i in body_list:
             data = ml.main(i)
             result.append(data)
-            cursor.execute(query, (data[0], data[1], data[3]))
+            cursor.execute(query, (data["INPUT"], data["CLASS"], data["PROBABILITY"]))
             cnx.commit()
 
         cursor.close()

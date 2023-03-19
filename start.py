@@ -25,9 +25,10 @@ def submit():
 
         for i in body_list:
             data = ml.main(i)
-            result.append(data)
             cursor.execute(query, (data["INPUT"], data["CLASS_NO"], data["PROBABILITY"]))
             cnx.commit()
+            data["PROBABILITY"] = f'{data["PROBABILITY"]:.2f}%'
+            result.append(data)
 
         cursor.close()
         cnx.close()

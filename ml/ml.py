@@ -31,52 +31,48 @@ def tokenizing(text):
     trie = Trie(custom_words_list)
     tokenizer_newmm = Tokenizer(custom_dict=trie, engine='newmm', keep_whitespace=False)
     
-    stopwords_csv = pd.read_csv('./ml/stopwords.csv')
-    # stopwords_list = list(stopwords_csv['Word'])
-    stopwords_list = ["ทำ", "ไหม", "ผม", "คน", "เรื่อง",  "ตอนนี้", "ทราบ", "น", "บอ", "แบบนี้", "โดน", "ดี", "ขอบคุณ", "รู้", "นะคะ", "บอ",  "กรุงไทย", "กี่", "ชื่อ", "ไทย", "หรอ", "ตอน", "พี่", "ดู", "เค้า", "แม่", "หนู", "เพื่อน", "รบกวน", "สวัสดี", "เจอ", "ที่จะ", "หัวข้อ", "ส", "ค", "พ่อ", "หา", "เหมือน", "กสิกร", "อยากรู้", "ตัว", "งง", 
-    "กลับมา", "นึง", "ผู้รู้", "ตัวเอง", "ทำได้", "เก่า", "ท", "ไม่ต้อง", "สำหรับ", "แล้วก็", "อะ", "เข้ามา", "แทน", "หน้า", "ดิฉัน", "ก", "ย", "แล้", "แฟน", "สัก", "ง", "เรียบร้อย", "คับ", "สรุป", "กระทู้", "ธอส", "ออกมา", "ป่าว", "เด็ก", "สงสัย", "เหมือนกัน", "อ่าน", "ต่อไป", "กลัว"]
-    new_stopwords = stopwords +  stopwords_list
+    keyword_csv = pd.read_csv('./ml/keywords.csv')
+    keyword = list(keyword_csv['Word'])
     
     text = re.sub('เเ','แ', text)
-    text = re.sub('เเ','แ', text)
+    text = re.sub('ํา','า', text)
+
     text = re.sub('แอป','แอพ', text)
     text = re.sub('แอฟ','แอพ', text)
     text = re.sub('แอ๊ปฯ','แอพ', text)
     text = re.sub('แอ๊ป','แอพ', text)
     text = re.sub('แอ็ป','แอพ', text)
     text = re.sub('แอ็พ','แอพ', text)
-    text = re.sub('แอพพลิเคชัน','แอพพลิเคชั่น', text)
+    text = re.sub('แอปฯ','แอพ', text)
+
+
+    text = re.sub('แอพพลิเคชัน','แอพ', text)
     text = re.sub('แอพพลิเคชั่น','แอพ', text)
+    text = re.sub('แอปพลิเคชั่น','แอพ', text)
+    text = re.sub('แอปพลิเคชัน','แอพ', text)
+
     text = re.sub('application','แอพ', text)
     text = re.sub('Application','แอพ', text)
-    text = re.sub('pre approved','อนุมัติ', text)
-    text = re.sub('pre approve','อนุมัติ', text)
+    text = re.sub('pre approved','อนุมัติล่วงหน้า', text)
+    text = re.sub('pre approve','อนุมัติล่วงหน้า', text)
     text = re.sub('app','แอพ', text)
     text = re.sub('App','แอพ', text)
+
     text = re.sub('ATM','เอทีเอ็ม', text)
     text = re.sub('atm','เอทีเอ็ม', text)
     text = re.sub('Atm','เอทีเอ็ม', text)
+
     text = re.sub('MyMo','มายโม', text)
     text = re.sub('mymo','มายโม', text)
     text = re.sub('my mo','มายโม', text)
     text = re.sub('Mymo','มายโม', text)
     text = re.sub('My mo','มายโม', text)
     text = re.sub('My Mo','มายโม', text)
+
     text = re.sub('ธ\.','ธนาคาร', text)
 
-    temp = re.sub('[0-9]', '', text)
+    temp = re.sub('[^ก-๏ ]', '', text)
     text = ' '.join(temp.split())
-
-    temp = re.sub('[!@#$%^&*,?+()-/\.:;"…><_]', '', text)
-    text = ' '.join(temp.split())
-
-    # Emoji Remover
-    temp = demoji.replace(text,'')
-    text = ' '.join(temp.split())
-
-    # English Remover
-    temp = re.sub('[A-Za-z]', '', text)
-    text = ' '.join(temp.split()) 
 
     rmv = text
 
@@ -84,7 +80,7 @@ def tokenizing(text):
     newmm = tokenizer_newmm.word_tokenize(rmv)
 
     ## Stop Word Remover
-    newmm = [j for j in newmm if j not in new_stopwords]
+    newmm = [j for j in newmm if j in keyword]
 
     ## Thai Letter Only
     newmm = re.sub('[^ก-๙0-9 ]', '', ' '.join(newmm))

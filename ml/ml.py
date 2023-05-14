@@ -85,6 +85,7 @@ def tokenizing(text):
     ## Thai Letter Only
     newmm = re.sub('[^ก-๙0-9 ]', '', ' '.join(newmm))
 
+    print(newmm)
     return newmm
 
 def classifing(text):
@@ -97,10 +98,8 @@ def classifing(text):
     table_all = pd.read_csv('./ml/keywords.csv', sep=';')
 
     param = pd.DataFrame(columns=list(table_all['Word']))
-    print(param)
-    print(display_tfidf_all)
 
-    df = pd.concat([param, display_tfidf_all], join='left')
+    df = pd.concat([param, display_tfidf_all], join='outer')
 
 
     df1 = df[list(table_all['Word'])]

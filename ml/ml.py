@@ -100,7 +100,7 @@ def classifing(text):
     print(param)
     print(display_tfidf_all)
 
-    df = pd.concat([param, display_tfidf_all], join='outer')
+    df = pd.concat([param, display_tfidf_all], join='left')
 
 
     df1 = df[list(table_all['Word'])]

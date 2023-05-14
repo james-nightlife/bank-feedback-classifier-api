@@ -34,6 +34,6 @@ def submit():
         cnx.close()
     except Exception as e:
         result = str(e)
-        print(result)
+        print(e)
     finally:
         return {'data': result}

@@ -97,10 +97,11 @@ def classifing(text):
     table_all = pd.read_csv('./ml/keywords.csv', sep=';')
 
     param = pd.DataFrame(columns=list(table_all['Word']))
+    print(param)
+    print(display_tfidf_all)
 
-    print(list(table_all['Word']))
-    
     df = pd.concat([param, display_tfidf_all], join='outer')
+
 
     df1 = df[list(table_all['Word'])]
     df1 = df1.fillna(0)

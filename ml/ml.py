@@ -98,6 +98,8 @@ def classifing(text):
     table_all = pd.read_csv('./ml/keywords.csv', sep=';')
 
     param = pd.DataFrame(columns=list(table_all['Word']))
+    
+    display_tfidf_all.reset_index(drop=True)
 
     df = pd.concat([param, display_tfidf_all], join='outer')
 

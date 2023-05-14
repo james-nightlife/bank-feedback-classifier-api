@@ -93,12 +93,12 @@ def classifing(text):
     X_all = tfidf_vec_all.fit_transform([text])
 
     display_tfidf_all = pd.DataFrame(X_all.toarray(), columns = tfidf_vec_all.get_feature_names_out())
-    print(tfidf_vec_all.get_feature_names_out())
 
     table_all = pd.read_csv('./ml/keywords.csv', sep=';')
 
     param = pd.DataFrame(columns=list(table_all['Word']))
 
+    print(list(table_all['Word']))
     
     df = pd.concat([param, display_tfidf_all], join='outer')
 

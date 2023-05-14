@@ -31,7 +31,7 @@ def tokenizing(text):
     trie = Trie(custom_words_list)
     tokenizer_newmm = Tokenizer(custom_dict=trie, engine='newmm', keep_whitespace=False)
     
-    keyword_csv = pd.read_csv('./ml/keywords.csv')
+    keyword_csv = pd.read_csv('./ml/keywords.csv', sep=';')
     keyword = list(keyword_csv['Word'])
     
     text = re.sub('เเ','แ', text)

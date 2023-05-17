@@ -105,7 +105,7 @@ def classifing(text):
 
     loaded_model = pickle.load(open('./ml/clf_xgb_model.sav', 'rb'))
     result = loaded_model.predict(df1)[0]
-    prob = loaded_model.predict_proba(df1)[0][result] * 100
+    prob = round(loaded_model.predict_proba(df1)[0][result] * 100, 2)
     return result, prob
 
 def main(text):
